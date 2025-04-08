@@ -1,11 +1,11 @@
 Tools Used
 ----------
 
-*   **Frontend**: React ,Bootstrap 5.3
-*   **Backend**: Node.js and Express
+*   **Frontend**: React.js ,Bootstrap 5.3
+*   **Backend**: node.js and Express
 *   **Database**: MySQL(Xampp Server)
 *   **Authentication**: JWT token, bcrypt
-*   **Libraries** dotenv(env variables store),CORS(cross origin resource sharing),mysql2, react router dom
+*   **Libraries** Dotenv(env variables store),CORS(cross origin resource sharing),mysql2, React router dom
 
 How to Set Up the Project
 -------------------------
