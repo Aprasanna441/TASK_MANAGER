@@ -5,7 +5,7 @@ Tools Used
 *   **Backend**: Node.js and Express
 *   **Database**: MySQL(Xampp Server)
 *   **Authentication**: JWT token, bcrypt
-*   **libraries: dotenv(env variables store),cors(cross origin resource sharing)
+*   **Libraries** dotenv(env variables store),CORS(cross origin resource sharing),mysql2, react router dom
 
 How to Set Up the Project
 -------------------------
