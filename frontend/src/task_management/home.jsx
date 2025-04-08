@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const Home = () => {
   const [data, setData] = useState([])
@@ -8,6 +9,7 @@ const Home = () => {
   const [deletionMessage, setDeletionMessage] = useState("")
   const [error, setError] = useState("")
   const [user,setUser]=useState("")
+  const navigate=useNavigate()
 
   //fetching user tasks
   const fetchData = async () => {
@@ -96,6 +98,13 @@ const Home = () => {
 
     }
   }
+
+
+  //logout function
+  const logout=()=>{
+    localStorage.removeItem("token")
+    navigate("/signup")
+  }
   return (
     <>
 
@@ -126,13 +135,14 @@ const Home = () => {
               <td>{new Date(item.updated_at).toLocaleString()}</td>
               <td> <button className='btn btn-danger' onClick={() => deleteTask(item.id)}>X</button></td>
             </tr>
-          ):`${user} Has no tasks set yet`}
+          ):`No task set by ${user}`}
+          
 
 
         </tbody>
       </table>
 
-      <form id='addForm' onSubmit={addTask} className='bg-info'>
+      <form id='addForm' onSubmit={addTask} className='bg-info-subtle'>
         <h3>Add Task</h3>
         <p className='text-success'> {message}</p> <br />
         <label htmlFor="title" className='mx-2 my-2'>Title </label>
@@ -142,7 +152,7 @@ const Home = () => {
         <button type='submit' className='btn btn-primary'>Add Task</button>
       </form>
 <br />
-      <button className='btn btn-danger' onClick={()=>localStorage.removeItem("token") }>Logout</button>
+      <button className='btn btn-danger' onClick={logout}>Logout</button>
     </>
   )
 }
