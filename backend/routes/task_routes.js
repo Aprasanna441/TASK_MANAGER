@@ -6,13 +6,13 @@ const router=express.Router()
 //middleware to check if user is authenticated to  perform add,list or deletion of tasks
 router.get('/list',checkToken)
 router.post('/add',checkToken)
-router.post('/delete',checkToken)
+router.delete('/delete/:id',checkToken)
 
 
 // Public route
 router.get('/list',listTask)
 router.post('/add',addTask)
-router.post('/delete',deleteTask)
+router.delete('/delete/:id',deleteTask)
 
 
 export  default router

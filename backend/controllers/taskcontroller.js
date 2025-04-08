@@ -2,17 +2,17 @@ import connection from "../config/db.js";
 
 //add more tasks
 export const addTask = async (req, res) => {
-    const { title } = req.body
+    const { title, description } = req.body
     const user_id = req.user.userId
 
     // Checking if any of the params is not received
     if (!title) {
-        return res.status(400).json({ message: 'Title cannot be empty' });
+        return res.status(400).json({ message: 'Every field is mandatory' });
     }
 
     try {
-        const query = 'INSERT INTO TASKS (title,user_id) VALUES (?,?)'
-        const [result] = await connection.promise().query(query, [title, user_id])
+        const query = 'INSERT INTO TASKS (description,title,user_id) VALUES (?,?,?)'
+        const [result] = await connection.promise().query(query, [description, title, user_id])
         return res.status(201).json({ message: "Task added successfully", taskId: result.insertId })
 
     }
@@ -29,8 +29,8 @@ export const listTask = async (req, res) => {
     const user_id = req.user.userId
 
     try {
-        const query = 'SELECT * FROM TASKS WHERE user_id = ? '
-        const [result] =await connection.promise().query(query, [user_id])
+        const query = 'SELECT * FROM TASKS WHERE user_id = ?  ORDER BY created_at ASC '
+        const [result] = await connection.promise().query(query, [user_id])
 
         // If no tasks found for the user, return an appropriate message
         if (result.length === 0) {
@@ -49,14 +49,15 @@ export const listTask = async (req, res) => {
 
 //delete specific task
 export const deleteTask = async (req, res) => {
-    const { task_id } = req.body;
+    const task_id = req.params.id;
+    console.log(task_id)
     const user_id = req.user.userId;
 
 
     try {
         const [task] = await connection.promise().query('SELECT * FROM TASKS WHERE id = ? AND user_id = ?', [task_id, user_id]);
-            //query to delete task
-         const query = 'DELETE FROM TASKS WHERE id = ? AND user_id = ?';
+        //query to delete task
+        const query = 'DELETE FROM TASKS WHERE id = ? AND user_id = ?';
         const [result] = await connection.promise().query(query, [task_id, user_id]);
 
 

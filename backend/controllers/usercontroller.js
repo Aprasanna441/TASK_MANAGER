@@ -4,11 +4,11 @@ import connection from "../config/db.js";
 
 //Function to register user
 export const userSignup =  async (req, res) => {
-  const { name, email, password } = req.body;
+  const {  email, password } = req.body; 
 
   // Checking if any of the params is not received
-  if (!name || !email || !password) {
-    return res.status(400).json({ message: 'Name, email, and password are required.' });
+  if (!email || !password) {
+    return res.status(400).json({ message: 'Email, and password are required.' });
   }
 
   try {
@@ -24,8 +24,8 @@ export const userSignup =  async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     // Insert the new user into the database
-    const query = 'INSERT INTO users (name, email, password) VALUES (?, ?, ?)';
-    const [result] = await connection.promise().query(query, [name, email, hashedPassword]);
+    const query = 'INSERT INTO users (email, password) VALUES ( ?, ?)';
+    const [result] = await connection.promise().query(query, [email, hashedPassword]);
   
     // JWT Token creation
     const token = jwt.sign(
