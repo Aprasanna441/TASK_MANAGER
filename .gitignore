@@ -1,0 +1,73 @@
+# Backend - Node.js (API)
+
+# Node.js dependencies
+/backend/node_modules/
+
+# Backend build output (e.g., if you're using TypeScript)
+backend/dist/
+
+# Backend environment variables
+backend/.env
+
+# Backend logs
+backend/*.log
+backend/logs/
+
+# Database files (if any)
+backend/*.sqlite
+backend/*.db
+backend/*.bak
+backend/*.backup
+
+# IDE settings for backend (VSCode, etc.)
+backend/.vscode/
+backend/.idea/
+
+# Frontend - Vite/React (UI)
+
+# Node.js dependencies
+/frontend/node_modules/
+
+# Frontend build output (Vite, React, etc.)
+frontend/dist/
+frontend/build/
+
+# Frontend environment variables
+frontend/.env
+frontend/.env.local
+
+# IDE settings for frontend (VSCode, etc.)
+frontend/.vscode/
+frontend/.idea/
+
+# Logs
+*.log
+logs/
+
+# Common Ignored Files
+
+# .env files (for both backend and frontend, to keep sensitive info safe)
+.env
+.env.local
+.env.*.local
+
+# NPM/Yarn debug files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Operating system files (MacOS, Windows)
+.DS_Store
+Thumbs.db
+
+# Coverage directory for testing (e.g., jest)
+coverage/
+
+# TypeScript build files (if using TypeScript)
+*.tsbuildinfo
+
+# VSCode workspace settings (for both frontend and backend)
+.vscode/
+
+# Miscellaneous files
+.idea/
