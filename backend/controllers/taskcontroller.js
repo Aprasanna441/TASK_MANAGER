@@ -29,14 +29,15 @@ export const listTask = async (req, res) => {
     const user_id = req.user.userId
 
     try {
+        const [user]=await connection.promise().query('SELECT * FROM users WHERE id=?',[user_id])
         const query = 'SELECT * FROM TASKS WHERE user_id = ?  ORDER BY created_at ASC '
         const [result] = await connection.promise().query(query, [user_id])
 
         // If no tasks found for the user, return an appropriate message
         if (result.length === 0) {
-            return res.status(404).json({ message: 'No tasks found for this user' });
+            return res.status(404).json({ message: 'No tasks found for this user', user:user[0].email });
         }
-        res.status(200).json({ tasks: result });
+        res.status(200).json({ tasks: result,user: user[0].email });
     }
     catch (error) {
         console.error('Error', error);

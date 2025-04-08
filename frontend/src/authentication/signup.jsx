@@ -16,6 +16,8 @@ const Signup = () => {
     return emailRegex.test(email);
   };
 
+  //navigate
+
   // Handle form submission
   const submitHandler = async (e) => {
     e.preventDefault(); // Prevent default form submission

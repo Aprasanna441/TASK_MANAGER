@@ -7,6 +7,7 @@ const Home = () => {
   const [message, setMessage] = useState("")
   const [deletionMessage, setDeletionMessage] = useState("")
   const [error, setError] = useState("")
+  const [user,setUser]=useState("")
 
   //fetching user tasks
   const fetchData = async () => {
@@ -22,6 +23,7 @@ const Home = () => {
 
     const result = await res.json()
     setData(result.tasks)
+    setUser(result.user)
     console.log(result)
 
   }
@@ -99,7 +101,7 @@ const Home = () => {
 
 
 
-      <h1>Tasks for</h1>
+      <h1>Tasks for email <p className='text-info'>{user}</p> </h1>
       <p className='text-danger'>{deletionMessage}</p>
       <table class="table">
 
@@ -114,7 +116,8 @@ const Home = () => {
           </tr>
         </thead>
         <tbody>
-          {data.map((item, index) =>
+          
+          {data? data.map((item, index) =>
             <tr key={item.id} >
               <th scope="row">{index + 1}</th>
               <td>{item.title}</td>
@@ -123,7 +126,7 @@ const Home = () => {
               <td>{new Date(item.updated_at).toLocaleString()}</td>
               <td> <button className='btn btn-danger' onClick={() => deleteTask(item.id)}>X</button></td>
             </tr>
-          )}
+          ):`${user} Has no tasks set yet`}
 
 
         </tbody>
