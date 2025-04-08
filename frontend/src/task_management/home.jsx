@@ -85,15 +85,7 @@ const Home = () => {
         setMessage("Task Added Successfully")
         setDeletionMessage("")
         setData([])
-        
-        // setData(taskData=>[...taskData,{
-        //     // Make sure the result contains the new task data
-        //   id:result.task.id,
-        //   title: result.task.title,
-        //   description: result.task.description,
-        //   created_at: result.task.created_at,
-        //   updated_at: result.task.updated_at}])
-        
+
       }
       else {
         setError("Couldnt add task")
