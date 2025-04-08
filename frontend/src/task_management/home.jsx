@@ -138,6 +138,8 @@ const Home = () => {
         <textarea id='description' name='description'></textarea> <br />
         <button type='submit' className='btn btn-primary'>Add Task</button>
       </form>
+<br />
+      <button className='btn btn-danger' onClick={()=>localStorage.removeItem("token") }>Logout</button>
     </>
   )
 }
