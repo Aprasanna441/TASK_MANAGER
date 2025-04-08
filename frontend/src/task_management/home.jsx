@@ -4,7 +4,7 @@ import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 const Home = () => {
-  const [data, setData] = useState([])
+  const [taskData, setData] = useState([])
   const [message, setMessage] = useState("")
   const [deletionMessage, setDeletionMessage] = useState("")
   const [error, setError] = useState("")
@@ -30,10 +30,6 @@ const Home = () => {
 
   }
 
-  //to update data on component load
-  useEffect(() => {
-    fetchData()
-  }, [data]) //should remount when new task is added
 
 
   const deleteTask = async (task_id) => {
@@ -87,6 +83,17 @@ const Home = () => {
       console.log(result)
       if (result.message) {
         setMessage("Task Added Successfully")
+        setDeletionMessage("")
+        setData([])
+        
+        // setData(taskData=>[...taskData,{
+        //     // Make sure the result contains the new task data
+        //   id:result.task.id,
+        //   title: result.task.title,
+        //   description: result.task.description,
+        //   created_at: result.task.created_at,
+        //   updated_at: result.task.updated_at}])
+        
       }
       else {
         setError("Couldnt add task")
@@ -103,8 +110,14 @@ const Home = () => {
   //logout function
   const logout=()=>{
     localStorage.removeItem("token")
-    navigate("/signup")
+    navigate("/")
   }
+
+    //to update data on component load
+    useEffect(() => {
+      fetchData()
+    }, [taskData]) //should remount when new task is added
+  
   return (
     <>
 
@@ -126,7 +139,7 @@ const Home = () => {
         </thead>
         <tbody>
           
-          {data? data.map((item, index) =>
+          {taskData?taskData.map((item, index) =>
             <tr key={item.id} >
               <th scope="row">{index + 1}</th>
               <td>{item.title}</td>
@@ -135,7 +148,8 @@ const Home = () => {
               <td>{new Date(item.updated_at).toLocaleString()}</td>
               <td> <button className='btn btn-danger' onClick={() => deleteTask(item.id)}>X</button></td>
             </tr>
-          ):`No task set by ${user}`}
+          ):""}
+          {taskData? "":"No Task set by User"}
           
 
 

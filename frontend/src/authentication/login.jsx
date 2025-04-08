@@ -37,7 +37,7 @@ const Login = () => {
         const actualData = { email, password };
   
         try {
-          const res = await fetch("http://localhost:8000/api/user/login", {
+          const res = await fetch('http://localhost:8000/api/user/login', {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -74,7 +74,7 @@ const Login = () => {
         <div class="col-md-4 col-lg-12 bg-secondary">
           <br />
           <h2 class="text-center">Login</h2>
-          <form id="LoginForm" onSubmit={submitHandler}>
+          <form id="LoginForm" onSubmit={submitHandler} method='POST'>
           {passwordError} <br />{emailError} <br />{serverError}
             <div class="form-group">
               <label for="email">Email</label>

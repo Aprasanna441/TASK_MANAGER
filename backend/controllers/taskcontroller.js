@@ -13,7 +13,10 @@ export const addTask = async (req, res) => {
     try {
         const query = 'INSERT INTO TASKS (description,title,user_id) VALUES (?,?,?)'
         const [result] = await connection.promise().query(query, [description, title, user_id])
-        return res.status(201).json({ message: "Task added successfully", taskId: result.insertId })
+
+        //return newly added task data as response
+        const newTask= await connection.promise().query('SELECT * FROM tasks WHERE id=?',[result.insertId])
+        return res.status(201).json({ message: "Task added successfully", taskId: result.insertId,task:newTask[0] })
 
     }
     catch (error) {
